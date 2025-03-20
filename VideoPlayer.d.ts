@@ -59,6 +59,8 @@ interface VideoPlayerProperties extends VideoProperties {
   disableTimer?: boolean;
   /** Hide the back button */
   disableBack?: boolean;
+  /** Fire when press resolution control */
+  onPressResolution?: ()=> void;
 }
 
 export default class VideoPlayer extends Component<VideoPlayerProperties> {
@@ -79,4 +81,10 @@ export default class VideoPlayer extends Component<VideoPlayerProperties> {
      */
     ref: Video;
   };
+  /**
+   * Select video resolution by index.
+   * @param index
+   */
+  selectVideoResolutionByIndex(index: number): void;
+
 }

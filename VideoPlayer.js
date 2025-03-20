@@ -126,6 +126,7 @@ export default class VideoPlayer extends Component {
       onVideoResolutionChange: this.props.onVideoResolutionChange,
       onRateChange: this.props.onRateChange,
       onComponentLayout: this._onComponentLayout.bind(this),
+      onPressResolution: this.props.onPressResolution,
     };
 
     /**
@@ -206,6 +207,32 @@ export default class VideoPlayer extends Component {
       this.setState({videoResolution});
     }
   };
+
+
+  /**
+   * Select video resolution by index
+   * @param index
+   */
+  selectVideoResolutionByIndex(index) {
+    const { videoSources } = this.props;
+    if (index < 0 || index >= videoSources.length) {
+      console.warn('Invalid index for video resolution');
+      return;
+    }
+
+    const { videoResolution, uri } = videoSources[index];
+
+    let state = this.state;
+    state.videoResolution = videoResolution;
+    state.source = { uri };
+    state.changingVideoResolution = true;
+    this.setState(state);
+
+    if (typeof this.events.onVideoResolutionChange === 'function') {
+      this.events.onVideoResolutionChange(videoResolution);
+    }
+  }
+
   /**
     | -------------------------------------------------------
     | Events
@@ -1286,7 +1313,7 @@ export default class VideoPlayer extends Component {
       <Text style={styles.controls.videoResolutionText}>
         {this.state.videoResolution}
       </Text>,
-      this.methods.toggleVideoResolution,
+      !!this.events.onPressResolution ? this.events.onPressResolution : this.methods.toggleVideoResolution,
       styles.controls.videoResolution,
       this.state.loading,
     );
