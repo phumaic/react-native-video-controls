@@ -41,6 +41,7 @@ export default class VideoPlayer extends Component {
     isCasting: false,
     elapsedTime: 0,
     googleCastButton: null,
+    headers: {}
   };
 
   constructor(props) {
@@ -91,6 +92,7 @@ export default class VideoPlayer extends Component {
       error: false,
       duration: 0,
       source: {uri: videoSource?.uri},
+      headers: this.props.headers
     };
 
     /**
@@ -1569,7 +1571,7 @@ export default class VideoPlayer extends Component {
             onEnd={this.events.onEnd}
             onSeek={this.events.onSeek}
             style={[styles.player.video, this.styles.videoStyle]}
-            source={this.state.source}
+            source={{uri: this.state.source?.uri, headers: this.state.headers}}
           />
           {this.renderSkipIcons()}
           {this.renderError()}

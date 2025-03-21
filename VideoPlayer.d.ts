@@ -6,7 +6,15 @@ interface DuckNavigator {
   pop: () => void;
 }
 
-interface VideoPlayerProperties extends VideoProperties {
+/**
+ * Video source object
+ * */
+export interface VideoSource{
+  uri: string;
+  videoResolution: string;
+}
+
+export interface VideoPlayerProperties extends VideoProperties {
   /** If true, clicking the fullscreen button will toggle the <Video /> component between cover/contain, set to false if you want to customize fullscreen behaviour */
   toggleResizeModeOnFullscreen?: boolean;
   /** The amountof time (in milliseconds) to animate the controls in and out. */
@@ -61,6 +69,13 @@ interface VideoPlayerProperties extends VideoProperties {
   disableBack?: boolean;
   /** Fire when press resolution control */
   onPressResolution?: ()=> void;
+
+  /** Video sources */
+  videoSources: VideoSource[];
+  /** Current video resolution */
+  videoResolution: string;
+  /** Headers attach to each Video request */
+  headers?: {[key: string]: string};
 }
 
 export default class VideoPlayer extends Component<VideoPlayerProperties> {
