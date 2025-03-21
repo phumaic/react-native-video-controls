@@ -74,6 +74,8 @@ export interface VideoPlayerProperties extends VideoProperties {
   videoSources: VideoSource[];
   /** Current video resolution */
   videoResolution: string;
+  /** Fired when video resolution change */
+  onVideoResolutionChange: (resolution: string) => void;
   /** Headers attach to each Video request */
   headers?: {[key: string]: string};
 }
