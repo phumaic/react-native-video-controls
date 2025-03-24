@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {StyleProp, ViewStyle} from 'react-native';
-import Video, {LoadError, VideoProperties} from 'react-native-video';
+import Video, {LoadError, ReactVideoProps as VideoProperties} from 'react-native-video';
 
 interface DuckNavigator {
   pop: () => void;
